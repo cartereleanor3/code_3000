@@ -1,0 +1,1 @@
+The main intended user of the code/data in my repo is myself to complete coursework for CSE 3000. Another intended user would be my professor as a viewer to grade assignments submitted through gradescope. The repository is public, so technically anyone could view it, however, I decided not to change it to private in case it interfered with gradescope. 
