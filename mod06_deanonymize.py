@@ -34,7 +34,8 @@ def deanonymization_rate(matches_df, anon_df):
     """
     return len(matches_df)/len(anon_df)
 
-anon_df, aux_df = load_data('mod06_data/anonymized.csv', 'mod06_data/auxiliary.csv')
-matches_df = link_records(anon_df, aux_df)
+if __name__ == "__main__":
+    anon_df, aux_df = load_data('mod06_data/anonymized.csv', 'mod06_data/auxiliary.csv')
+    matches_df = link_records(anon_df, aux_df)
 
-print(deanonymization_rate(matches_df, anon_df))
+    print(deanonymization_rate(matches_df, anon_df))
