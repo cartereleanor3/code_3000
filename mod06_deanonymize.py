@@ -18,8 +18,12 @@ def link_records(anon_df, aux_df):
       anon_id, matched_name
     containing ONLY uniquely matched records.
     """
-    raise NotImplementedError
-
+    values = ["age", "zip3", "gender"]
+    names = aux_df[~aux_df.duplicated(subset=values, keep=False)]
+    ids = anon_df[~anon_df.duplicated(subset=values, keep=False)]
+    merged = names.merge(ids, on=values, how="inner", validate="one_to_one")
+    matches = merged[["anon_id", "name"]].copy().rename(columns={"name": "matched_name"})
+    return matches
 
 def deanonymization_rate(matches_df, anon_df):
     """
@@ -27,3 +31,5 @@ def deanonymization_rate(matches_df, anon_df):
     that were uniquely re-identified.
     """
     raise NotImplementedError
+
+print(link_records(*load_data('mod06_data/anonymized.csv', 'mod06_data/auxiliary.csv')))
