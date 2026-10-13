@@ -30,6 +30,9 @@ def deanonymization_rate(matches_df, anon_df):
     Compute the fraction of anonymized records
     that were uniquely re-identified.
     """
-    raise NotImplementedError
+    return len(matches_df)/len(anon_df)
 
-print(link_records(*load_data('mod06_data/anonymized.csv', 'mod06_data/auxiliary.csv')))
+load_data_input = 'mod06_data/anonymized.csv', 'mod06_data/auxiliary.csv'
+matches_df = link_records(*load_data(*load_data_input))
+
+print(deanonymization_rate(matches_df, load_data(*load_data_input)[0]))
