@@ -19,6 +19,8 @@ def link_records(anon_df, aux_df):
     containing ONLY uniquely matched records.
     """
     values = ["age", "zip3", "gender"]
+    anon_df = anon_df.dropna(subset=values)
+    aux_df = aux_df.dropna(subset=values)
     names = aux_df[~aux_df.duplicated(subset=values, keep=False)]
     ids = anon_df[~anon_df.duplicated(subset=values, keep=False)]
     merged = names.merge(ids, on=values, how="inner", validate="one_to_one")
@@ -32,7 +34,7 @@ def deanonymization_rate(matches_df, anon_df):
     """
     return len(matches_df)/len(anon_df)
 
-load_data_input = 'mod06_data/anonymized.csv', 'mod06_data/auxiliary.csv'
-matches_df = link_records(*load_data(*load_data_input))
+anon_df, aux_df = load_data('mod06_data/anonymized.csv', 'mod06_data/auxiliary.csv')
+matches_df = link_records(anon_df, aux_df)
 
-print(deanonymization_rate(matches_df, load_data(*load_data_input)[0]))
+print(deanonymization_rate(matches_df, anon_df))
